@@ -1,35 +1,33 @@
-// import java.util.Arrays;
-
 public class SortedRotatedArray {
     // Function to check if the array is sorted and rotated.
     public static boolean checkRotatedAndSorted(int arr[], int num) {
-
-        // Step 1: Check for non-decreasing sorted and rotated.
-        int countAsc = 0; // Count for the number of order violations in ascending case
-        for (int i = 0; i < num; i++) {
-            if (arr[i] > arr[(i + 1) % num]) {
-                countAsc++;
+        int pivotalPoint = 0; // Declare pivotalPoint outside the if blocks
+        
+        // For ascending array type
+        if (arr[num - 1] < arr[0]) {
+            for (int i = 0; i < num - 1; i++) {
+                if (arr[i + 1] < arr[i]) {
+                    pivotalPoint++;
+                }
             }
         }
 
-        // Step 2: Check for non-increasing sorted and rotated.
-        int countDesc = 0; // Count for the number of order violations in descending case
-        for (int i = 0; i < num; i++) {
-            if (arr[i] < arr[(i + 1) % num]) {
-                countDesc++;
+        // For descending array type
+        if (arr[num - 1] > arr[0]) {
+            for (int i = 0; i < num - 1; i++) {
+                if (arr[i + 1] > arr[i]) {
+                    pivotalPoint++;
+                }
             }
         }
 
-        // Step 3: Return true if the array is sorted and rotated in either way (exactly one violation in order)
-        return (countAsc == 1 || countDesc == 1);
+        // Return false if more than one pivotal point found
+        return pivotalPoint <= 1; // This simplifies the return statement
     }
 
     public static void main(String[] args) {
-        int[] arr1 = {3, 4, 1, 2}; // Example sorted array 1
-        // int[] arr2 = {2, 4, 6, 8}; // Example sorted array 2
-        
-        boolean result = checkRotatedAndSorted(arr1,arr1.length);
-        System.out.println(result);
+        int[] arr1 = {3, 4, 1, 2}; // Example sorted rotated array
+        boolean result = checkRotatedAndSorted(arr1, arr1.length);
+        System.out.println(result); // Output will be true for a rotated sorted array
     }
-}   
-
+}
