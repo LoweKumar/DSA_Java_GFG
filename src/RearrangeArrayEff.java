@@ -1,51 +1,39 @@
 public class RearrangeArrayEff {
-
-    // Function to rearrange array alternately
-    public static void rearrange(long[] arr, int n)
-    {
-        // Initialize index of first minimum and first
-        // maximum element
-        int maxIdx = n - 1, minIdx = 0;
-
-        // Store maximum element of array
-        long M = arr[n - 1] + 1;
-
-        // Traverse array elements
+    
+    public static void rearrange(int[] arr) {
+        int n = arr.length; 
+        
+        // Find the maximum element in the array
+        int maxElement = arr[n - 1] + 1; // Since all elements are positive integers, maxElement is guaranteed to be larger than any array element
+        
+        int maxIndex = n - 1; // Pointer to the end of the array (max element)
+        int minIndex = 0; // Pointer to the beginning of the array (min element)
+        
+        // Traverse the array and rearrange elements alternately
         for (int i = 0; i < n; i++) {
-            // At even index : we have to put maximum
-            // element
             if (i % 2 == 0) {
-                arr[i] += (arr[maxIdx] % M) * M;
-                maxIdx--;
-            }
-            // At odd index : we have to put minimum element
-            else {
-                arr[i] += (arr[minIdx] % M) * M;
-                minIdx++;
+                // Even index: store max value from maxIndex
+                arr[i] = arr[i] + (arr[maxIndex] % maxElement) * maxElement;
+                maxIndex--;
+            } else {
+                // Odd index: store min value from minIndex
+                arr[i] = arr[i] + (arr[minIndex] % maxElement) * maxElement;
+                minIndex++;
             }
         }
-
-        // Reduce array elements to store the new value
+        
+        // Now decode the array values to retrieve the final rearranged array
         for (int i = 0; i < n; i++) {
-            arr[i] = arr[i] / M;
+            arr[i] = arr[i] / maxElement;  // Extract the new value
         }
     }
 
-    // Driver code
-    public static void main(String args[])
-    {
-        long[] arr = { 1, 2, 3, 4, 5, 6 };
-        int n = arr.length;
-
-        System.out.println("Original Array");
-        for (long num : arr) {
-            System.out.print(num + " ");
-        }
-
-        rearrange(arr, n);
-
-        System.out.println("\nModified Array");
-        for (long num : arr) {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        rearrange(arr);
+        
+        // Print the rearranged array
+        for (int num : arr) {
             System.out.print(num + " ");
         }
     }
