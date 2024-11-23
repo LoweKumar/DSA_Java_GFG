@@ -14,6 +14,7 @@ public class RearrangeArrayEff {
             if (i % 2 == 0) {
                 // Even index: store max value from maxIndex
                 arr[i] = arr[i] + (arr[maxIndex] % maxElement) * maxElement;
+                System.out.println("Value = "+arr[i]);
                 maxIndex--;
             } else {
                 // Odd index: store min value from minIndex
