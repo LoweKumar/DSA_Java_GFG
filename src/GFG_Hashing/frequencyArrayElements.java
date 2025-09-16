@@ -27,10 +27,13 @@ public class frequencyArrayElements {
             hm.put(element, hm.getOrDefault(element, 0)+1);
         }
 
-        for(Map.Entry<Integer, Integer> entry: hm.entrySet())
-        {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
-        }
+//        for(Map.Entry<Integer, Integer> entry: hm.entrySet())
+//        {
+//            System.out.println(entry.getKey()+" : "+entry.getValue());
+//        }
+
+        //using forEach to iterate the hashmap
+        hm.forEach((k,v)-> System.out.println(k+" : "+v));
 
     }
 
